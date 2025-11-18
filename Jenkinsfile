@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = 'dockerhub-credentials'
-        IMAGE_NAME = 'afrozrowshan12345'
+        IMAGE_NAME = 'afrozrowshan12345/flask-ecommerce'
         KUBECONFIG = '/var/lib/jenkins/.kube/config'
     }
 
@@ -16,31 +16,25 @@ pipeline {
             }
         }
 
-    stage('Build Docker Image') {
-    script {
-        echo '🐳 Building Docker image...'
-        // Ensure the full repository name is included here: afrozrowshan12345/flask-ecommerce
-        sh 'docker build -t afrozrowshan12345/flask-ecommerce:13 .' 
-    }
-}
-
-stage('Push to Docker Hub') {
-    script {
-        echo '📤 Pushing image to Docker Hub...'
-        // CORRECT SYNTAX: Use the required closure structure
-        withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', 
-                                          usernameVariable: 'DOCKER_USER', 
-                                          passwordVariable: 'DOCKER_PASS')]) {
-            
-            // 1. Log in to Docker using the retrieved variables
-            sh "echo \"${DOCKER_PASS}\" | docker login -u ${DOCKER_USER} --password-stdin"
-            
-            // 2. Push the image
-            sh 'docker push afrozrowshan12345/flask-ecommerce:13'
+        stage('Build Docker Image') {
+            steps {
+                echo '🐳 Building Docker image...'
+                sh 'docker build -t $IMAGE_NAME:13 .'
+            }
         }
-        // IMPORTANT: The login is only valid inside the withCredentials block.
-    }
-}
+
+        stage('Push to Docker Hub') {
+            steps {
+                echo '📤 Pushing image to Docker Hub...'
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials',
+                                                  usernameVariable: 'DOCKER_USER',
+                                                  passwordVariable: 'DOCKER_PASS')]) {
+                    sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
+                    sh 'docker push $IMAGE_NAME:13'
+                }
+            }
+        }
+
         stage('Deploy to Minikube') {
             steps {
                 script {
