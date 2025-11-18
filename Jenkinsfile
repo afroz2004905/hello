@@ -34,10 +34,7 @@ pipeline {
                 }
             }
         }
-
-        // ... (All other stages) ...
-
-      stage('Deploy to Minikube') {
+ stage('Deploy to Minikube') {
     steps {
         script {
             echo '⚙️ Deploying to Minikube...'
