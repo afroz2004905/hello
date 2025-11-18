@@ -35,33 +35,35 @@ pipeline {
             }
         }
 
-      stage('Deploy to Minikube') {
-    steps {
-        script {
-            echo '⚙️ Deploying to Minikube...'
+        // ... (All other stages) ...
 
-            // 1. ADD THIS LINE: Fixes the internal certificate paths in the kubeconfig file
-            sh "sed -i 's|/root/docker-project/minikube_data/.minikube|/var/lib/jenkins/.minikube|g' /var/lib/jenkins/.kube/config"
+      stage('Deploy to Minikube') {
+    steps {
+        script {
+            echo '⚙️ Deploying to Minikube...'
+            // 1. ADD THIS LINE: Fixes the internal certificate paths in the kubeconfig file
+            sh "sed -i 's|/root/docker-project/minikube_data/.minikube|/var/lib/jenkins/.minikube|g' /var/lib/jenkins/.kube/config"
+            // 2. FIX IMAGE TAG
+            sh 'sed -i s|image: .*|image: afrozrowshan12345/flask-ecommerce:13| deployment.yaml' 
+            sh 'echo 🚀 Applying Kubernetes deployment...'
+            sh 'kubectl apply -f deployment.yaml --validate=false --insecure-skip-tls-verify'
+            
+            // Wait for rollout to ensure deployment is ready
+            sh 'kubectl rollout status deployment/flask-app' 
+        }
+    }
+} // <--- THIS BRACE CLOSES THE 'Deploy to Minikube' STAGE (Line 57)
 
-            // 2. FIX IMAGE TAG: You built image :13, deploy image :13 (not :19)
-            sh 'sed -i s|image: .*|image: afrozrowshan12345/flask-ecommerce:13| deployment.yaml' 
+} // <--- **YOU MUST ADD THIS CLOSING BRACE TO END THE 'stages' BLOCK** (Line 58 should be here)
 
-            sh 'echo 🚀 Applying Kubernetes deployment...'
-            sh 'kubectl apply -f deployment.yaml --validate=false --insecure-skip-tls-verify'
-            
-            // Wait for rollout to ensure deployment is ready
-            sh 'kubectl rollout status deployment/flask-app' 
-        }
-    }
-}
+    post { // <--- NOW THE 'post' BLOCK IS IN THE CORRECT LOCATION
+        success {
+            echo "✅ All stages completed successfully!"
+        }
+        failure {
+            echo "❌ Deployment failed! Please check Jenkins logs."
+        }
+    }
+} // <--- THIS CLOSES THE 'pipeline' BLOCK
 
-    post {
-        success {
-            echo "✅ All stages completed successfully!"
-        }
-        failure {
-            echo "❌ Deployment failed! Please check Jenkins logs."
-        }
-    }
-}
-}
+// The final '}' in your provided script seems extraneous and should be removed.
