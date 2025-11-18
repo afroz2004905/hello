@@ -27,13 +27,20 @@ pipeline {
 stage('Push to Docker Hub') {
     script {
         echo '📤 Pushing image to Docker Hub...'
-        withCredentials(...) { // Your existing credentials block
-            // Use the fully qualified name to push
-            sh 'docker push afrozrowshan12345/flask-ecommerce:13' 
+        // CORRECT SYNTAX: Use the required closure structure
+        withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', 
+                                          usernameVariable: 'DOCKER_USER', 
+                                          passwordVariable: 'DOCKER_PASS')]) {
+            
+            // 1. Log in to Docker using the retrieved variables
+            sh "echo \"${DOCKER_PASS}\" | docker login -u ${DOCKER_USER} --password-stdin"
+            
+            // 2. Push the image
+            sh 'docker push afrozrowshan12345/flask-ecommerce:13'
         }
+        // IMPORTANT: The login is only valid inside the withCredentials block.
     }
 }
-
         stage('Deploy to Minikube') {
             steps {
                 script {
