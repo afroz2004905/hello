@@ -35,28 +35,25 @@ pipeline {
             }
         }
 
-        stage('Deploy to Minikube') {
-            steps {
-                script {
-                    echo "⚙️ Deploying to Minikube..."
-                    sh '''
-                        export KUBECONFIG=$KUBECONFIG
-                        echo "🔧 Updating image version in deployment file..."
-                        sed -i "s|image: .*|image: $IMAGE_NAME:$BUILD_NUMBER|" deployment.yaml
+      stage('Deploy to Minikube') {
+    steps {
+        script {
+            echo '⚙️ Deploying to Minikube...'
 
-                        echo "🚀 Applying Kubernetes deployment..."
-                        kubectl apply -f deployment.yaml --validate=false --insecure-skip-tls-verify
+            // 1. ADD THIS LINE: Fixes the internal certificate paths in the kubeconfig file
+            sh "sed -i 's|/root/docker-project/minikube_data/.minikube|/var/lib/jenkins/.minikube|g' /var/lib/jenkins/.kube/config"
 
-                        echo "⏳ Waiting for rollout to complete..."
-                        kubectl rollout status deployment/flask-app --timeout=90s
+            // 2. FIX IMAGE TAG: You built image :13, deploy image :13 (not :19)
+            sh 'sed -i s|image: .*|image: afrozrowshan12345/flask-ecommerce:13| deployment.yaml' 
 
-                        echo "🎉 Deployment successful!"
-                        echo "🌍 Access your app at: http://$(minikube ip):30007"
-                    '''
-                }
-            }
+            sh 'echo 🚀 Applying Kubernetes deployment...'
+            sh 'kubectl apply -f deployment.yaml --validate=false --insecure-skip-tls-verify'
+            
+            // Wait for rollout to ensure deployment is ready
+            sh 'kubectl rollout status deployment/flask-app' 
         }
     }
+}
 
     post {
         success {
