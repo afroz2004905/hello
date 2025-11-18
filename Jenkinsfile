@@ -16,34 +16,23 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    echo "🐳 Building Docker image..."
-                    sh '''
-                        docker build -t $IMAGE_NAME:$BUILD_NUMBER .
-                        docker images | grep flask-ecommerce
-                    '''
-                }
-            }
-        }
+    stage('Build Docker Image') {
+    script {
+        echo '🐳 Building Docker image...'
+        // Ensure the full repository name is included here: afrozrowshan12345/flask-ecommerce
+        sh 'docker build -t afrozrowshan12345/flask-ecommerce:13 .' 
+    }
+}
 
-        stage('Push to Docker Hub') {
-            steps {
-                script {
-                    echo "📤 Pushing image to Docker Hub..."
-                    withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS,
-                                                      usernameVariable: 'DOCKER_USER',
-                                                      passwordVariable: 'DOCKER_PASS')]) {
-                        sh '''
-                            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                            docker push $IMAGE_NAME:$BUILD_NUMBER
-                            docker logout
-                        '''
-                    }
-                }
-            }
+stage('Push to Docker Hub') {
+    script {
+        echo '📤 Pushing image to Docker Hub...'
+        withCredentials(...) { // Your existing credentials block
+            // Use the fully qualified name to push
+            sh 'docker push afrozrowshan12345/flask-ecommerce:13' 
         }
+    }
+}
 
         stage('Deploy to Minikube') {
             steps {
