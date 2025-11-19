@@ -50,28 +50,27 @@ pipeline {
             }
         }
 
-        stage('Deploy to Minikube') {
+      stage('Deploy to Minikube') {
             steps {
-                // All deployment logic must be within a 'steps' block
-                script { // Using 'script' inside 'steps' allows for complex logic like sed
+                script {
                     echo '⚙️ Deploying to Minikube...'
 
-                    // CRITICAL FIX: Update certificate paths in the kubeconfig file 
-                    // This resolves the 'no such file or directory' error for the jenkins user
+                    // CRITICAL FIX: The first sed command must use single quotes around the pattern
+                    // to prevent shell interpolation issues with '|'
                     sh "sed -i 's|/root/docker-project/minikube_data/.minikube|/var/lib/jenkins/.minikube|g' ${KUBECONFIG}"
 
-                    // Update the deployment.yaml file to use the new Docker Hub image tag
-                    sh "sed -i s|image: .*|image: ${IMAGE_NAME}:${IMAGE_TAG}| deployment.yaml"
+                    // FIX: Ensure the second sed command is properly quoted and escaped if necessary
+                    // Using double quotes (") for Groovy string and single quotes (') for sed pattern is safest.
+                    sh 'sed -i "s|image: .*|image: ${IMAGE_NAME}:${IMAGE_TAG}|" deployment.yaml'
 
                     echo '🚀 Applying Kubernetes deployment...'
                     sh 'kubectl apply -f deployment.yaml --validate=false --insecure-skip-tls-verify'
                     
-                    // Wait for the deployment to fully rollout before finishing the stage
+                    echo '⏳ Waiting for rollout to complete...'
                     sh 'kubectl rollout status deployment/flask-app'
                 }
             }
         }
-    }
 
     // Define actions after all stages are complete
     post {

@@ -1,32 +1,32 @@
-Log file created at: 2025/11/17 15:16:31
+Log file created at: 2025/11/19 16:07:23
 Running on machine: ip-172-31-24-205
 Binary: Built with gc go1.24.6 for linux/amd64
 Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
-I1117 15:16:31.533484   35047 out.go:360] Setting OutFile to fd 1 ...
-I1117 15:16:31.533575   35047 out.go:408] TERM=xterm,COLORTERM=, which probably does not support color
-I1117 15:16:31.533577   35047 out.go:374] Setting ErrFile to fd 2...
-I1117 15:16:31.533580   35047 out.go:408] TERM=xterm,COLORTERM=, which probably does not support color
-I1117 15:16:31.533712   35047 root.go:338] Updating PATH: /root/docker-project/minikube_data/.minikube/bin
-W1117 15:16:31.534408   35047 root.go:314] Error reading config file at /root/docker-project/minikube_data/.minikube/config/config.json: open /root/docker-project/minikube_data/.minikube/config/config.json: no such file or directory
-I1117 15:16:31.535115   35047 out.go:368] Setting JSON to false
-I1117 15:16:31.535941   35047 start.go:130] hostinfo: {"hostname":"ip-172-31-24-205","uptime":4507,"bootTime":1763388085,"procs":153,"os":"linux","platform":"ubuntu","platformFamily":"debian","platformVersion":"22.04","kernelVersion":"6.8.0-1041-aws","kernelArch":"x86_64","virtualizationSystem":"vbox","virtualizationRole":"host","hostId":"ec2034fb-124e-b2da-9d8e-8b0f717f0813"}
-I1117 15:16:31.535982   35047 start.go:140] virtualization: vbox host
-I1117 15:16:31.537374   35047 out.go:179] * minikube v1.37.0 on Ubuntu 22.04
-I1117 15:16:31.538958   35047 out.go:179]   - MINIKUBE_HOME=/root/docker-project/minikube_data
-W1117 15:16:31.539488   35047 preload.go:293] Failed to list preload files: open /root/docker-project/minikube_data/.minikube/cache/preloaded-tarball: no such file or directory
-I1117 15:16:31.539522   35047 notify.go:220] Checking for updates...
-I1117 15:16:31.540155   35047 driver.go:421] Setting default libvirt URI to qemu:///system
-I1117 15:16:31.559657   35047 docker.go:123] docker version: linux-28.2.2:
-I1117 15:16:31.559710   35047 cli_runner.go:164] Run: docker system info --format "{{json .}}"
-I1117 15:16:31.577106   35047 info.go:266] docker info: {ID:fafb583a-688a-40a4-b205-bca8950e159c Containers:0 ContainersRunning:0 ContainersPaused:0 ContainersStopped:0 Images:20 Driver:overlay2 DriverStatus:[[Backing Filesystem extfs] [Supports d_type true] [Using metacopy false] [Native Overlay Diff true] [userxattr false]] SystemStatus:<nil> Plugins:{Volume:[local] Network:[bridge host ipvlan macvlan null overlay] Authorization:<nil> Log:[awslogs fluentd gcplogs gelf journald json-file local splunk syslog]} MemoryLimit:true SwapLimit:true KernelMemory:false KernelMemoryTCP:false CPUCfsPeriod:true CPUCfsQuota:true CPUShares:true CPUSet:true PidsLimit:true IPv4Forwarding:true BridgeNfIptables:false BridgeNfIP6Tables:false Debug:false NFd:33 OomKillDisable:false NGoroutines:45 SystemTime:2025-11-17 15:16:31.570407422 +0000 UTC LoggingDriver:json-file CgroupDriver:systemd NEventsListener:0 KernelVersion:6.8.0-1041-aws OperatingSystem:Ubuntu 22.04.5 LTS OSType:linux Architecture:x86_64 IndexServerAddress:https://index.docker.io/v1/ RegistryConfig:{AllowNondistributableArtifactsCIDRs:[] AllowNondistributableArtifactsHostnames:[] InsecureRegistryCIDRs:[::1/128 127.0.0.0/8] IndexConfigs:{DockerIo:{Name:docker.io Mirrors:[] Secure:true Official:true}} Mirrors:[]} NCPU:2 MemTotal:4002168832 GenericResources:<nil> DockerRootDir:/var/lib/docker HTTPProxy: HTTPSProxy: NoProxy: Name:ip-172-31-24-205 Labels:[] ExperimentalBuild:false ServerVersion:28.2.2 ClusterStore: ClusterAdvertise: Runtimes:{Runc:{Path:runc}} DefaultRuntime:runc Swarm:{NodeID: NodeAddr: LocalNodeState:inactive ControlAvailable:false Error: RemoteManagers:<nil>} LiveRestoreEnabled:false Isolation: InitBinary:docker-init ContainerdCommit:{ID: Expected:} RuncCommit:{ID: Expected:} InitCommit:{ID: Expected:} SecurityOptions:[name=apparmor name=seccomp,profile=builtin name=cgroupns] ProductLicense: Warnings:<nil> ServerErrors:[] ClientInfo:{Debug:false Plugins:[] Warnings:<nil>}}
-I1117 15:16:31.577156   35047 docker.go:318] overlay module found
-I1117 15:16:31.578606   35047 out.go:179] * Using the docker driver based on user configuration
-I1117 15:16:31.580107   35047 start.go:304] selected driver: docker
-I1117 15:16:31.580114   35047 start.go:918] validating driver "docker" against <nil>
-I1117 15:16:31.580123   35047 start.go:929] status for docker: {Installed:true Healthy:true Running:false NeedsImprovement:false Error:<nil> Reason: Fix: Doc: Version:}
-W1117 15:16:31.580194   35047 out.go:285] * The "docker" driver should not be used with root privileges. If you wish to continue as root, use --force.
-W1117 15:16:31.580213   35047 out.go:285] * If you are running minikube within a VM, consider using --driver=none:
-W1117 15:16:31.580222   35047 out.go:285] *   https://minikube.sigs.k8s.io/docs/reference/drivers/none/
-I1117 15:16:31.581388   35047 out.go:203] 
-W1117 15:16:31.583222   35047 out.go:285] X Exiting due to DRV_AS_ROOT: The "docker" driver should not be used with root privileges.
-I1117 15:16:31.584388   35047 out.go:203] 
+I1119 16:07:23.863489    1651 out.go:360] Setting OutFile to fd 1 ...
+I1119 16:07:23.863587    1651 out.go:408] TERM=xterm,COLORTERM=, which probably does not support color
+I1119 16:07:23.863603    1651 out.go:374] Setting ErrFile to fd 2...
+I1119 16:07:23.863613    1651 out.go:408] TERM=xterm,COLORTERM=, which probably does not support color
+I1119 16:07:23.863845    1651 root.go:338] Updating PATH: /root/docker-project/minikube_data/.minikube/bin
+W1119 16:07:23.863962    1651 root.go:314] Error reading config file at /root/docker-project/minikube_data/.minikube/config/config.json: open /root/docker-project/minikube_data/.minikube/config/config.json: no such file or directory
+I1119 16:07:23.864170    1651 out.go:368] Setting JSON to false
+I1119 16:07:23.864916    1651 start.go:130] hostinfo: {"hostname":"ip-172-31-24-205","uptime":325,"bootTime":1763568119,"procs":157,"os":"linux","platform":"ubuntu","platformFamily":"debian","platformVersion":"22.04","kernelVersion":"6.8.0-1042-aws","kernelArch":"x86_64","virtualizationSystem":"vbox","virtualizationRole":"host","hostId":"ec2034fb-124e-b2da-9d8e-8b0f717f0813"}
+I1119 16:07:23.864955    1651 start.go:140] virtualization: vbox host
+I1119 16:07:23.867853    1651 out.go:179] * minikube v1.37.0 on Ubuntu 22.04
+I1119 16:07:23.870606    1651 out.go:179]   - MINIKUBE_HOME=/root/docker-project/minikube_data
+W1119 16:07:23.870616    1651 preload.go:293] Failed to list preload files: open /root/docker-project/minikube_data/.minikube/cache/preloaded-tarball: no such file or directory
+I1119 16:07:23.870644    1651 notify.go:220] Checking for updates...
+I1119 16:07:23.874013    1651 driver.go:421] Setting default libvirt URI to qemu:///system
+I1119 16:07:23.893057    1651 docker.go:123] docker version: linux-28.2.2:
+I1119 16:07:23.893120    1651 cli_runner.go:164] Run: docker system info --format "{{json .}}"
+I1119 16:07:23.910297    1651 info.go:266] docker info: {ID:fafb583a-688a-40a4-b205-bca8950e159c Containers:2 ContainersRunning:0 ContainersPaused:0 ContainersStopped:2 Images:57 Driver:overlay2 DriverStatus:[[Backing Filesystem extfs] [Supports d_type true] [Using metacopy false] [Native Overlay Diff true] [userxattr false]] SystemStatus:<nil> Plugins:{Volume:[local] Network:[bridge host ipvlan macvlan null overlay] Authorization:<nil> Log:[awslogs fluentd gcplogs gelf journald json-file local splunk syslog]} MemoryLimit:true SwapLimit:true KernelMemory:false KernelMemoryTCP:false CPUCfsPeriod:true CPUCfsQuota:true CPUShares:true CPUSet:true PidsLimit:true IPv4Forwarding:true BridgeNfIptables:false BridgeNfIP6Tables:false Debug:false NFd:33 OomKillDisable:false NGoroutines:45 SystemTime:2025-11-19 16:07:23.904085285 +0000 UTC LoggingDriver:json-file CgroupDriver:systemd NEventsListener:0 KernelVersion:6.8.0-1042-aws OperatingSystem:Ubuntu 22.04.5 LTS OSType:linux Architecture:x86_64 IndexServerAddress:https://index.docker.io/v1/ RegistryConfig:{AllowNondistributableArtifactsCIDRs:[] AllowNondistributableArtifactsHostnames:[] InsecureRegistryCIDRs:[::1/128 127.0.0.0/8] IndexConfigs:{DockerIo:{Name:docker.io Mirrors:[] Secure:true Official:true}} Mirrors:[]} NCPU:2 MemTotal:4002168832 GenericResources:<nil> DockerRootDir:/var/lib/docker HTTPProxy: HTTPSProxy: NoProxy: Name:ip-172-31-24-205 Labels:[] ExperimentalBuild:false ServerVersion:28.2.2 ClusterStore: ClusterAdvertise: Runtimes:{Runc:{Path:runc}} DefaultRuntime:runc Swarm:{NodeID: NodeAddr: LocalNodeState:inactive ControlAvailable:false Error: RemoteManagers:<nil>} LiveRestoreEnabled:false Isolation: InitBinary:docker-init ContainerdCommit:{ID: Expected:} RuncCommit:{ID: Expected:} InitCommit:{ID: Expected:} SecurityOptions:[name=apparmor name=seccomp,profile=builtin name=cgroupns] ProductLicense: Warnings:<nil> ServerErrors:[] ClientInfo:{Debug:false Plugins:[] Warnings:<nil>}}
+I1119 16:07:23.910362    1651 docker.go:318] overlay module found
+I1119 16:07:23.913220    1651 out.go:179] * Using the docker driver based on user configuration
+I1119 16:07:23.916067    1651 start.go:304] selected driver: docker
+I1119 16:07:23.916074    1651 start.go:918] validating driver "docker" against <nil>
+I1119 16:07:23.916083    1651 start.go:929] status for docker: {Installed:true Healthy:true Running:false NeedsImprovement:false Error:<nil> Reason: Fix: Doc: Version:}
+W1119 16:07:23.916161    1651 out.go:285] * The "docker" driver should not be used with root privileges. If you wish to continue as root, use --force.
+W1119 16:07:23.916177    1651 out.go:285] * If you are running minikube within a VM, consider using --driver=none:
+W1119 16:07:23.916190    1651 out.go:285] *   https://minikube.sigs.k8s.io/docs/reference/drivers/none/
+I1119 16:07:23.919023    1651 out.go:203] 
+W1119 16:07:23.922703    1651 out.go:285] X Exiting due to DRV_AS_ROOT: The "docker" driver should not be used with root privileges.
+I1119 16:07:23.925842    1651 out.go:203] 
